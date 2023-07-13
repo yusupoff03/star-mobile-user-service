@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: USER_SERVICE
+  datasource:
+    username: postgres
+    password: 7777
+    url: jdbc:postgres://localhost:5432/user_service_db
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+eureka:
+  client:
+    service-url:
+      defaultUrl: ${EUREKA_URI:http://localhost:8761/eureka/}
+    instance:
+      preferIpAddress: true

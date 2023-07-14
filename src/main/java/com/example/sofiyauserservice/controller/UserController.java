@@ -1,9 +1,10 @@
 package com.example.sofiyauserservice.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
+
 }

@@ -5,6 +5,7 @@ import com.example.sofiyauserservice.domain.entity.user.UserEntity;
 import com.example.sofiyauserservice.domain.entity.user.UserState;
 import com.example.sofiyauserservice.repository.RoleRepository;
 import com.example.sofiyauserservice.repository.UserRepository;
+import com.example.sofiyauserservice.service.verificationcode.GenerateVerificationCode;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,15 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final RoleRepository roleRepository;
+    private final GenerateVerificationCode generateVerificationCode;
 
     @Transactional
     public UserEntity save(UserCreatDto userCreatDto) {
         checkUserEmail(userCreatDto.getEmail());
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
-        userEntity.setVerificationCode(generateVerificationCode());
+        userEntity.setVerificationCode(generateVerificationCode.generateVerificationCode(userEntity).getCode());// bu yerda aslida verificationcode packege dan foydalanish kere edi
         userEntity.setState(UserState.UNVERIFIED);
        return userRepository.save(userEntity);
-    }
-
-    private String generateVerificationCode() {
-        Random random = new Random(100000);
-        return String.valueOf(random.nextInt(1000000));
     }
 
     private void checkUserEmail(String email) {

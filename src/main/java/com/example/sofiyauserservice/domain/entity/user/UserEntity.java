@@ -26,5 +26,4 @@ public class UserEntity extends BaseEntity {
     @ManyToMany
     private List<PermissionEntity> permissions;
     private UserState state;
-    private String verificationCode;
 }

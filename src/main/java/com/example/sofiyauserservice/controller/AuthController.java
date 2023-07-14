@@ -14,7 +14,7 @@ public class AuthController {
 
     private final UserService userService;
 
-    @RequestMapping("/sign-up")
+    @PostMapping("/sign-up")
     public UserEntity signUp(@RequestBody UserCreatDto userCreatDto){
         return userService.save(userCreatDto);
     }

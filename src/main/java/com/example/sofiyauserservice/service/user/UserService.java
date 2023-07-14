@@ -6,4 +6,5 @@ import com.example.sofiyauserservice.domain.entity.user.UserEntity;
 
 public interface UserService {
     UserEntity save(UserCreatDto userCreatDto);
+    Boolean verify(String code,String sendingCode);
 }

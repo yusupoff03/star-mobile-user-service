@@ -19,8 +19,8 @@ public class AuthController {
         return userService.save(userCreatDto);
     }
     @PutMapping("/{code}/verify")
-    public ResponseEntity<Boolean> verify(@PathVariable String code){
-     return ResponseEntity.ok(true);
+    public ResponseEntity<Boolean> verify(@PathVariable String code,@RequestParam String sendingCode){
+     return ResponseEntity.ok(userService.verify(code,sendingCode));
     }
 
 

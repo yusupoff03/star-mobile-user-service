@@ -8,5 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface VerificationCodeRepository extends JpaRepository<VerificationCode, UUID> {
-
+  VerificationCode findVerificationCodeByCode(String code);
 }

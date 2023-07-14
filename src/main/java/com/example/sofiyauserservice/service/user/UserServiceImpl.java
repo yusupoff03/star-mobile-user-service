@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService{
     public UserEntity save(UserCreatDto userCreatDto) {
         checkUserEmail(userCreatDto.getEmail());
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
-        userEntity.setVerificationCode(generateVerificationCode.generateVerificationCode(userEntity).getCode());// bu yerda aslida verificationcode packege dan foydalanish kere edi
         userEntity.setState(UserState.UNVERIFIED);
+        generateVerificationCode.generateVerificationCode(userEntity);
        return userRepository.save(userEntity);
     }
 

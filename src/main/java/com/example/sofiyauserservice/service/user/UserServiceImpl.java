@@ -1,4 +1,4 @@
-package com.example.sofiyauserservice.service;
+package com.example.sofiyauserservice.service.user;
 
 import com.example.sofiyauserservice.domain.dto.UserCreatDto;
 import com.example.sofiyauserservice.domain.entity.user.UserEntity;
@@ -16,7 +16,7 @@ import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final RoleRepository roleRepository;

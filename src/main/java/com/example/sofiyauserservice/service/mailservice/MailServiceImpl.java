@@ -1,4 +1,4 @@
-package com.example.sofiyauserservice.service;
+package com.example.sofiyauserservice.service.mailservice;
 
 import com.example.sofiyauserservice.domain.dto.MailDto;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.net.URI;
 
 @Service
 @RequiredArgsConstructor
-public class MailService {
+public class MailServiceImpl implements MailService{
 
     private final RestTemplate restTemplate;
 

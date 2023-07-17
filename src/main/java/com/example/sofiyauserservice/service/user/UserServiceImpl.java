@@ -17,12 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.zip.DataFormatException;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final RoleRepository roleRepository;
@@ -35,25 +36,35 @@ public class UserServiceImpl implements UserService{
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
         userEntity.setState(UserState.UNVERIFIED);
         VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
-        userRepository.save(userEntity);;
-        mailService.sendVerificationCode(userEntity.getEmail(),verificationCode.getSendingCode());
+        userRepository.save(userEntity);
+        mailService.sendVerificationCode(userEntity.getEmail(), verificationCode.getSendingCode());
         return userEntity;
     }
 
     @Override
     public Boolean verify(String code, String sendingCode) {
         VerificationCode verificationCode = generateVerificationCode.getVerificationCode(code);
-        if(verificationCode==null){
+        if (verificationCode == null) {
             throw new DataNotFoundException("Verification Code did not match");
         }
-       if(Objects.equals(sendingCode,verificationCode.getSendingCode())
-               &&LocalDateTime.now().isBefore(verificationCode.getExpiryDate())){
-           UserEntity user = verificationCode.getUser();
-           user.setState(UserState.ACTIVE);
-           userRepository.save(user);
-           return true;
-       }
-       throw new AuthenticationFailedException("Code is incorrect or Code is ragged");
+        if (Objects.equals(sendingCode, verificationCode.getSendingCode())
+                && LocalDateTime.now().isBefore(verificationCode.getExpiryDate())) {
+            UserEntity user = verificationCode.getUser();
+            user.setState(UserState.ACTIVE);
+            userRepository.save(user);
+            return true;
+        }
+        throw new AuthenticationFailedException("Code is incorrect or Code is ragged");
+    }
+
+    @Override
+    public Boolean getNewVerifyCode(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email)
+                .orElseThrow(() -> new DataNotFoundException("User not found,Please sign up"));
+      //  generateVerificationCode.deleteUserCode(userEntity);
+        VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
+        mailService.sendVerificationCode(email,verificationCode.getSendingCode());
+        return true;
     }
 
     private void checkUserEmail(String email) {

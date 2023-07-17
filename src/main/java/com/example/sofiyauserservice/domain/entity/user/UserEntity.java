@@ -1,9 +1,7 @@
 package com.example.sofiyauserservice.domain.entity.user;
 
 import com.example.sofiyauserservice.domain.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +28,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @ManyToMany
     private List<PermissionEntity> permissions;
+    @Enumerated(EnumType.STRING)
     private UserState state;
 
     @Override

@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
-//@Getter
-//@Setter
+@Getter
+@Setter
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

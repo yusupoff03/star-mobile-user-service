@@ -1,9 +1,7 @@
 package com.example.sofiyauserservice.domain.entity.user;
 
 import com.example.sofiyauserservice.domain.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -25,5 +23,6 @@ public class UserEntity extends BaseEntity {
 
     @ManyToMany
     private List<PermissionEntity> permissions;
+    @Enumerated(EnumType.STRING)
     private UserState state;
 }

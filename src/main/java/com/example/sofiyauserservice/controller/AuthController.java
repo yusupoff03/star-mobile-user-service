@@ -18,9 +18,13 @@ public class AuthController {
     public UserEntity signUp(@RequestBody UserCreatDto userCreatDto){
         return userService.save(userCreatDto);
     }
-    @PutMapping("/{code}/verify")
-    public ResponseEntity<Boolean> verify(@PathVariable String code,@RequestParam String sendingCode){
+    @PutMapping("/verify")
+    public ResponseEntity<Boolean> verify(@RequestParam String code,@RequestParam String sendingCode){
      return ResponseEntity.ok(userService.verify(code,sendingCode));
+    }
+    @GetMapping("/new-code")
+    public ResponseEntity<Boolean> getNewVerifyCode(@RequestParam String email){
+        return ResponseEntity.ok(userService.getNewVerifyCode(email));
     }
 
 

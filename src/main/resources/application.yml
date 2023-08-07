@@ -7,7 +7,7 @@ spring:
   datasource:
     username: postgres
 
-    password: 0825
+    password: 7777
     url: jdbc:postgresql://localhost:5432/user_service_db
 
     driver-class-name: org.postgresql.Driver
@@ -18,7 +18,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
 services:
-  notification-url: http://NOTIFICATION-SERVICE/notification
+  notification-url: http://NOTIFICATION_SERVICE/notification
+  product-url: http://PRODUCT_SERVICE/product
+  payment-url: http://PYMENT_SERVICE/payment
 eureka:
   client:
     service-url:

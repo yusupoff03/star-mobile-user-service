@@ -4,7 +4,6 @@ import com.example.sofiyauserservice.filter.JwtTokenFilter;
 import com.example.sofiyauserservice.service.AuthService;
 import com.example.sofiyauserservice.service.AuthenticationService;
 import com.example.sofiyauserservice.service.JwtService;
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +16,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.LinkedList;
 
 @Configuration
 @RequiredArgsConstructor
@@ -34,22 +35,12 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests((authorizer) -> {
                     authorizer
-                            .requestMatchers("/api/v1/auth/**").permitAll()
-//                            .requestMatchers(
-//                                    "/api/v1/book/get-all",
-//                                    "/api/v1/book/search"
-//                            ).authenticated()
-//                            .requestMatchers(
-//                                    "/api/v1/book/add",
-//                                    "/api/v1/book/{bookId}/update",
-//                                    "/api/v1/book/{bookId}/delete"
-//                            ).hasRole("LIBRARIAN")
-//                            .requestMatchers("/api/v1/user/**").hasRole("ADMIN")
+                            .requestMatchers("/user/auth/**").permitAll()
                             .anyRequest().authenticated();
 
                 })
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore((Filter) new JwtTokenFilter(authenticationService,jwtService),
+                .addFilterBefore((new JwtTokenFilter(authenticationService,jwtService)),
                         UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

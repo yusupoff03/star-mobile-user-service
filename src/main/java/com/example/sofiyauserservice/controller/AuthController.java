@@ -1,5 +1,7 @@
 package com.example.sofiyauserservice.controller;
 
+import com.example.sofiyauserservice.domain.dto.JwtResponse;
+import com.example.sofiyauserservice.domain.dto.LoginDto;
 import com.example.sofiyauserservice.domain.dto.UserCreatDto;
 import com.example.sofiyauserservice.domain.entity.user.UserEntity;
 import com.example.sofiyauserservice.service.user.UserService;
@@ -25,6 +27,10 @@ public class AuthController {
     @GetMapping("/new-code")
     public ResponseEntity<Boolean> getNewVerifyCode(@RequestParam String email){
         return ResponseEntity.ok(userService.getNewVerifyCode(email));
+    }
+    @GetMapping("sign-in")
+    public ResponseEntity<JwtResponse> signIn(@RequestBody LoginDto loginDto){
+        return ResponseEntity.ok(userService.signIn(loginDto));
     }
 
 

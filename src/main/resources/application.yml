@@ -18,9 +18,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
 services:
-  notification-url: http://NOTIFICATION_SERVICE/notification
-  product-url: http://PRODUCT_SERVICE/product
-  payment-url: http://PYMENT_SERVICE/payment
+  notification-url: http://NOTIFICATION-SERVICE/notification
+  product-url: http://PRODUCT-SERVICE/product
+  payment-url: http://PYMENT-SERVICE/payment
 eureka:
   client:
     service-url:

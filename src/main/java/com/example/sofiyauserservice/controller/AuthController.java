@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/user/auth")
 public class AuthController {
-
     private final UserService userService;
 
     @PostMapping("/sign-up")
@@ -28,11 +27,8 @@ public class AuthController {
     public ResponseEntity<Boolean> getNewVerifyCode(@RequestParam String email){
         return ResponseEntity.ok(userService.getNewVerifyCode(email));
     }
-    @GetMapping("sign-in")
+    @GetMapping("/sign-in")
     public ResponseEntity<JwtResponse> signIn(@RequestBody LoginDto loginDto){
         return ResponseEntity.ok(userService.signIn(loginDto));
     }
-
-
-
 }

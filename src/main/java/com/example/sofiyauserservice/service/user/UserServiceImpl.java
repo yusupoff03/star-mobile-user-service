@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
     public JwtResponse signIn(LoginDto loginDto) {
         UserEntity user = userRepository.findByEmail(loginDto.getEmail())
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
-        if(passwordEncoder.matches(user.getPassword(),loginDto.getPassword())){
+        if(passwordEncoder.matches(loginDto.getPassword(),user.getPassword())){
            return JwtResponse.builder().accessToken(jwtService.generateAccessToken(user)).build();
         }
         throw new DataNotFoundException("User not found");

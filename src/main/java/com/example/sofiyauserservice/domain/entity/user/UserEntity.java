@@ -24,15 +24,15 @@ public class UserEntity extends BaseEntity implements UserDetails {
    private String password;
     @ManyToOne(cascade = CascadeType.ALL)
     private RoleEntity role;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<PermissionEntity> permissions;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private PermissionEntity permission;
     @Enumerated(EnumType.STRING)
     private UserState state;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String ROLE = "ROLE_";
-        return List.of(new SimpleGrantedAuthority(ROLE+role));
+        return List.of(new SimpleGrantedAuthority(ROLE+role.getName()));
     }
 
     @Override

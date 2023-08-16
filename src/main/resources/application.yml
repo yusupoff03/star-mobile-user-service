@@ -7,7 +7,7 @@ spring:
   datasource:
     username: postgres
 
-    password: 7777
+    password: 0825
     url: jdbc:postgresql://localhost:5432/user_service_db
 
     driver-class-name: org.postgresql.Driver
@@ -28,3 +28,8 @@ eureka:
     instance:
       preferIpAddress: true
 
+jwt:
+  secret:
+    key: 753778214125442A472D4B6150645367566B59703373367639792F423F452848
+  access:
+    expiry: 3000000

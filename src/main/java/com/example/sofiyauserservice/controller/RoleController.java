@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/group")
+@RequestMapping("/api/v1/role")
 public class RoleController {
 
     private final RoleService roleService;
@@ -26,16 +26,16 @@ public class RoleController {
         return ResponseEntity.ok(roleService.save(roleDto));
     }
 
-    @DeleteMapping("/{groupId}/delete")
+    @DeleteMapping("/{roleId}/delete")
     @PreAuthorize("hasRole(ADMIN)")
     public ResponseEntity deleteGroup(
-            @PathVariable UUID groupId
+            @PathVariable UUID roleId
     ){
-        roleService.deleteById(groupId);
+        roleService.deleteById(roleId);
         return ResponseEntity.status(204).build();
     }
 
-    @PatchMapping("/{groupId}update")
+    @PatchMapping("/{roleId}update")
     @PreAuthorize("hasRole(ADMIN)")
     public ResponseEntity<RoleEntity> updateGroup(
             @PathVariable UUID roleId,

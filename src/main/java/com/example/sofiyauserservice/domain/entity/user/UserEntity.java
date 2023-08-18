@@ -11,6 +11,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "users")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

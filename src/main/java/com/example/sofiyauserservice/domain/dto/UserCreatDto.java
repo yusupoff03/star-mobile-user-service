@@ -26,5 +26,4 @@ public class UserCreatDto {
     @NotBlank(message = "name cannot be blank")
     private String password;
     private List<PermissionEntity> permissions;
-    private RoleEntity role;
 }

@@ -3,7 +3,6 @@ package com.example.sofiyauserservice.controller;
 import com.example.sofiyauserservice.domain.dto.RoleDto;
 import com.example.sofiyauserservice.domain.entity.user.RoleEntity;
 import com.example.sofiyauserservice.service.role.RoleService;
-import com.example.sofiyauserservice.service.role.RoleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,7 +35,7 @@ public class RoleController {
         return ResponseEntity.status(204).build();
     }
 
-    @PatchMapping("/{roleId}update")
+    @PutMapping("/{roleId}update")
     @PreAuthorize("hasRole(ADMIN)")
     public ResponseEntity<RoleEntity> updateGroup(
             @PathVariable UUID roleId,

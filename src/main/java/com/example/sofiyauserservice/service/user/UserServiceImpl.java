@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
         checkUserEmail(userCreatDto.getEmail());
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
         userEntity.setState(UserState.UNVERIFIED);
-        RoleEntity userRole = roleRepository.findRoleEntityByNameEqualsIgnoreCase(userCreatDto.getRole().getName());
+        RoleEntity userRole = roleRepository.findRoleEntityByNameEqualsIgnoreCase("User");
         if(userRole!=null){
             VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
             userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));

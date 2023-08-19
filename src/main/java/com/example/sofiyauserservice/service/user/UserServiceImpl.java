@@ -8,6 +8,7 @@ import com.example.sofiyauserservice.domain.entity.user.UserEntity;
 import com.example.sofiyauserservice.domain.entity.user.UserState;
 import com.example.sofiyauserservice.domain.entity.verification.VerificationCode;
 import com.example.sofiyauserservice.exception.AuthenticationFailedException;
+import com.example.sofiyauserservice.exception.ConflictException;
 import com.example.sofiyauserservice.exception.DataNotFoundException;
 import com.example.sofiyauserservice.repository.RoleRepository;
 import com.example.sofiyauserservice.repository.UserRepository;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -41,14 +41,14 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = modelMapper.map(userCreatDto, UserEntity.class);
         userEntity.setState(UserState.UNVERIFIED);
         RoleEntity userRole = roleRepository.findRoleEntityByNameEqualsIgnoreCase("User");
-        if(userRole!=null){
+        if (userRole != null) {
             VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
             userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
             userEntity.setRole(userRole);
             userRepository.save(userEntity);
             mailService.sendVerificationCode(userEntity.getEmail(), verificationCode.getSendingCode());
         }
-        if(userRole == null){
+        if (userRole == null) {
             RoleEntity save = roleRepository.save(userEntity.getRole());
             userEntity.setRole(save);
             VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
@@ -79,9 +79,9 @@ public class UserServiceImpl implements UserService {
     public Boolean getNewVerifyCode(String email) {
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(() -> new DataNotFoundException("User not found,Please sign up"));
-      //  generateVerificationCode.deleteUserCode(userEntity);
+        //  generateVerificationCode.deleteUserCode(userEntity);
         VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
-        mailService.sendVerificationCode(email,verificationCode.getSendingCode());
+        mailService.sendVerificationCode(email, verificationCode.getSendingCode());
         return true;
     }
 
@@ -89,15 +89,19 @@ public class UserServiceImpl implements UserService {
     public JwtResponse signIn(LoginDto loginDto) {
         UserEntity user = userRepository.findByEmail(loginDto.getEmail())
                 .orElseThrow(() -> new DataNotFoundException("User not found"));
-        if(passwordEncoder.matches(loginDto.getPassword(),user.getPassword())){
-           return JwtResponse.builder().accessToken(jwtService.generateAccessToken(user)).build();
+        if (passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+            if (user.getState().equals(UserState.ACTIVE)) {
+                return JwtResponse.builder().accessToken(jwtService.generateAccessToken(user)).build();
+            } else {
+                throw new AuthenticationFailedException("You are not verified user! Please verify your account and login");
+            }
         }
         throw new DataNotFoundException("User not found");
     }
 
     private void checkUserEmail(String email) {
         if (userRepository.findByEmail(email).isPresent()) {
-            throw new RuntimeException("email already exists");
+            throw new ConflictException("email already exists");
         }
     }
 

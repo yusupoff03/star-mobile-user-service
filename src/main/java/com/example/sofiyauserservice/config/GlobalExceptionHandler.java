@@ -48,5 +48,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
           UserBadRequestException e){
     return ResponseEntity.status(400).body(e.getMessage());
   }
+  @ExceptionHandler(value = {ConflictException.class})
+  public ResponseEntity<String> conflictException(ConflictException e){
+    return ResponseEntity.status(409).body(e.getMessage());
+  }
 }
 

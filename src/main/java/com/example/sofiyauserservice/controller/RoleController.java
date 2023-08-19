@@ -3,6 +3,7 @@ package com.example.sofiyauserservice.controller;
 import com.example.sofiyauserservice.domain.dto.RoleDto;
 import com.example.sofiyauserservice.domain.entity.user.RoleEntity;
 import com.example.sofiyauserservice.service.role.RoleService;
+import com.example.sofiyauserservice.service.role.RoleServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

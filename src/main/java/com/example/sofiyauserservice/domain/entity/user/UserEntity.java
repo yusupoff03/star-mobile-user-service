@@ -19,17 +19,17 @@ import java.util.List;
 @Setter
 @Builder
 public class UserEntity extends BaseEntity implements UserDetails {
-   private String name;
+   protected String name;
    @Column(unique = true,nullable = false)
-   private String email;
+   protected String email;
    @Column(nullable = false)
-   private String password;
+   protected String password;
     @ManyToOne(cascade = CascadeType.ALL)
-    private RoleEntity role;
+    protected RoleEntity role;
     @ManyToOne(cascade = CascadeType.ALL)
-    private PermissionEntity permission;
+    protected PermissionEntity permission;
     @Enumerated(EnumType.STRING)
-    private UserState state;
+    protected UserState state;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

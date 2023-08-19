@@ -17,6 +17,6 @@ import java.util.List;
 public class RoleEntity extends BaseEntity {
     @Column(unique = true)
     private String name;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<PermissionEntity> permissions;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    private List<PermissionEntity> permissions;
 }

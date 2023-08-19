@@ -24,8 +24,8 @@ public class UserEntity extends BaseEntity implements UserDetails {
    private String password;
     @ManyToOne(cascade = CascadeType.ALL)
     private RoleEntity role;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private PermissionEntity permission;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    private PermissionEntity permission;
     @Enumerated(EnumType.STRING)
     private UserState state;
 

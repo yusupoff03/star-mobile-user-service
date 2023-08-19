@@ -1,6 +1,6 @@
 package com.example.sofiyauserservice.domain.dto;
 
-import com.example.sofiyauserservice.domain.entity.user.PermissionEntity;
+//import com.example.sofiyauserservice.domain.entity.user.PermissionEntity;
 import com.example.sofiyauserservice.domain.entity.user.RoleEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +25,5 @@ public class UserCreatDto {
     @NotNull(message = "name cannot be null")
     @NotBlank(message = "name cannot be blank")
     private String password;
-    private List<PermissionEntity> permissions;
     private RoleEntity role;
 }

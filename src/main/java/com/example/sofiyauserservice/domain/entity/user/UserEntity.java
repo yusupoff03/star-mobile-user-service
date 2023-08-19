@@ -11,23 +11,26 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "users")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
 public class UserEntity extends BaseEntity implements UserDetails {
-   private String name;
+   protected String name;
    @Column(unique = true,nullable = false)
-   private String email;
+   protected String email;
    @Column(nullable = false)
-   private String password;
+   protected String password;
     @ManyToOne(cascade = CascadeType.ALL)
-    private RoleEntity role;
+    protected RoleEntity role;
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    private PermissionEntity permission;
+
     @Enumerated(EnumType.STRING)
-    private UserState state;
+    protected UserState state;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

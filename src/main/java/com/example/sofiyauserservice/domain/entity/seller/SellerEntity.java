@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
 public class SellerEntity extends UserEntity {
     private String lastName;
     private String fatherName;

@@ -1,6 +1,5 @@
 package com.example.sofiyauserservice.domain.dto;
 
-import com.example.sofiyauserservice.domain.entity.user.PermissionEntity;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -9,7 +8,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +24,6 @@ public class SellerDto {
     @NotNull(message = "name cannot be null")
     @NotBlank(message = "name cannot be blank")
     private String password;
-    private List<PermissionEntity> permissions;
     @NotNull(message = "LastName cannot be null")
     @NotBlank(message = "LastName cannot be blank")
     private String lastName;

@@ -1,6 +1,5 @@
 package com.example.sofiyauserservice.domain.dto;
 
-import com.example.sofiyauserservice.domain.entity.user.PermissionEntity;
 import com.example.sofiyauserservice.domain.entity.user.RoleEntity;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +23,5 @@ public class UserCreatDto {
     @NotNull(message = "password cannot be null")
     @NotBlank(message = "password cannot be blank")
     private String password;
-    private List<PermissionEntity> permissions;
-    private RoleEntity role;
+//    private RoleEntity role;
 }

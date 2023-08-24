@@ -7,7 +7,7 @@ spring:
   datasource:
     username: postgres
 
-    password: 0825
+    password: 1106
     url: jdbc:postgresql://localhost:5432/user_service_db
 
     driver-class-name: org.postgresql.Driver
@@ -32,4 +32,4 @@ jwt:
   secret:
     key: 753778214125442A472D4B6150645367566B59703373367639792F423F452848
   access:
-    expiry: 3000000
+    expiry: 30000000000

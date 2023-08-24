@@ -28,6 +28,7 @@ public class SecurityConfig {
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final String[] permitAll = {"/swagger-ui/**", "/v3/api-docs/**", "/user/auth/**", "/api/v1/role/**","/user/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,7 +36,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests((authorizer) -> {
                     authorizer
-                            .requestMatchers("/user/auth/**").permitAll()
+                            .requestMatchers(permitAll).permitAll()
                             .anyRequest().authenticated();
 
                 })

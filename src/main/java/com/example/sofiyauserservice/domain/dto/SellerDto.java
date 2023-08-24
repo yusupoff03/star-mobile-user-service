@@ -21,8 +21,8 @@ public class SellerDto {
     @NotNull(message = "Email cannot be null")
     @NotBlank(message = "Email cannot be blank")
     private String email;
-    @NotNull(message = "name cannot be null")
-    @NotBlank(message = "name cannot be blank")
+    @NotNull(message = "password cannot be null")
+    @NotBlank(message = "password cannot be blank")
     private String password;
     @NotNull(message = "LastName cannot be null")
     @NotBlank(message = "LastName cannot be blank")

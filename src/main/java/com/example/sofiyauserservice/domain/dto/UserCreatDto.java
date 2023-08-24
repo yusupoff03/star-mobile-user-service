@@ -22,8 +22,8 @@ public class UserCreatDto {
     @NotNull(message = "Email cannot be null")
     @NotBlank(message = "Email cannot be blank")
     private String email;
-    @NotNull(message = "name cannot be null")
-    @NotBlank(message = "name cannot be blank")
+    @NotNull(message = "password cannot be null")
+    @NotBlank(message = "password cannot be blank")
     private String password;
     private List<PermissionEntity> permissions;
     private RoleEntity role;

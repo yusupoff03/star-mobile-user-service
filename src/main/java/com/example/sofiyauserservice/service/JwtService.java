@@ -32,7 +32,6 @@ public class JwtService {
                 .addClaims(Map.of("roles",getRoles(userEntity.getAuthorities())))
                 .compact();
     }
-
     public Jws<Claims> extractToken(String token){
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
     }

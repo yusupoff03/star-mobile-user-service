@@ -1,25 +1,25 @@
 package com.example.sofiyauserservice.domain.entity.seller;
 
+import com.example.sofiyauserservice.domain.entity.BaseEntity;
 import com.example.sofiyauserservice.domain.entity.user.UserEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 
-@Entity
-@DiscriminatorColumn(name = "sellers")
+@Entity(name = "seller_info")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class SellerEntity extends UserEntity {
+public class SellerInfo extends BaseEntity {
     private String lastName;
-    private String fatherName;
+    private String fathersName;
     private LocalDate birthDate;
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String passportNumber;
-    @Column(unique = true,nullable =false)
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
     private String phoneNumber;
 }

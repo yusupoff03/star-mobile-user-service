@@ -2,7 +2,6 @@ package com.example.sofiyauserservice.repository;
 
 import com.example.sofiyauserservice.domain.entity.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

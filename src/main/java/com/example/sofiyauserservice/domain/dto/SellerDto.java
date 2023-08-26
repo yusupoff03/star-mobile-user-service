@@ -1,6 +1,5 @@
 package com.example.sofiyauserservice.domain.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -32,7 +31,6 @@ public class SellerDto {
     private String fatherName;
     @NotNull(message = "BirthDate cannot be null")
     private LocalDate birthDate;
-    @Column(unique = true, nullable = false)
     @NotBlank(message = "Passport number cannot be blank")
     @NotNull(message = "Passport number cannot be null")
     @Pattern(
@@ -40,6 +38,8 @@ public class SellerDto {
             message = "does not match the template(AA1234567)")
     @NotEmpty(message = "Passport can not be empty")
     private String passportNumber;
-    @Column(unique = true,nullable =false)
+    @NotNull(message = "Phone number cannot be null")
+    @Pattern(regexp = "^\\+998 \\d{2} \\d{3} \\d{4}$",
+    message = "does not match the template (+998991234567)")
     private String phoneNumber;
 }

@@ -2,6 +2,7 @@ package com.example.sofiyauserservice.service.user;
 
 import com.example.sofiyauserservice.domain.dto.JwtResponse;
 import com.example.sofiyauserservice.domain.dto.LoginDto;
+import com.example.sofiyauserservice.domain.dto.SellerDto;
 import com.example.sofiyauserservice.domain.dto.UserCreatDto;
 import com.example.sofiyauserservice.domain.entity.user.UserEntity;
 
@@ -11,4 +12,5 @@ public interface UserService {
     Boolean verify(String code,String sendingCode);
     Boolean getNewVerifyCode(String email);
     JwtResponse signIn(LoginDto loginDto);
+    UserEntity saveSeller(SellerDto sellerDto);
 }

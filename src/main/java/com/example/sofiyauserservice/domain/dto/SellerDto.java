@@ -39,7 +39,7 @@ public class SellerDto {
     @NotEmpty(message = "Passport can not be empty")
     private String passportNumber;
     @NotNull(message = "Phone number cannot be null")
-    @Pattern(regexp = "^\\+998 \\d{2} \\d{3} \\d{4}$",
-    message = "does not match the template (+998991234567)")
+//    @Pattern(regexp = "^\\+998 \\d{2} \\d{3} \\d{4}$",
+//    message = "does not match the template (+998991234567)")
     private String phoneNumber;
 }

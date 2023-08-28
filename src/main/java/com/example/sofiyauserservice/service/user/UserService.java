@@ -5,6 +5,9 @@ import com.example.sofiyauserservice.domain.dto.LoginDto;
 import com.example.sofiyauserservice.domain.dto.SellerDto;
 import com.example.sofiyauserservice.domain.dto.UserCreatDto;
 import com.example.sofiyauserservice.domain.entity.user.UserEntity;
+import org.apache.catalina.User;
+
+import java.util.UUID;
 
 
 public interface UserService {
@@ -13,4 +16,5 @@ public interface UserService {
     Boolean getNewVerifyCode(String email);
     JwtResponse signIn(LoginDto loginDto);
     UserEntity saveSeller(SellerDto sellerDto);
+    UserEntity updateUser(UserCreatDto userCreatDto, UUID userId);
 }

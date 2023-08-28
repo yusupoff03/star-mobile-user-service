@@ -16,10 +16,11 @@ public class SellerInfo extends BaseEntity {
     private String lastName;
     private String fathersName;
     private LocalDate birthDate;
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String passportNumber;
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
+    @Column(unique = true,nullable = false)
     private String phoneNumber;
 }

@@ -25,8 +25,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -126,11 +126,27 @@ public class UserServiceImpl implements UserService {
                             ,sellerDto.getPassportNumber()
                             ,save
                             ,sellerDto.getPhoneNumber());
-           sellerRepository.save(sellerInfo);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            sellerRepository.save(sellerInfo);
         }else {
-            throw new ConflictException("This Seller information already exists");
+            throw new ConflictException("This Seller information is already exists");
         }
+        VerificationCode verificationCode=generateVerificationCode.generateVerificationCode(save);
+        mailService.sendVerificationCode(save.getEmail(),verificationCode.getSendingCode());
       return save;
+    }
+
+    @Override
+    public UserEntity updateUser(UserCreatDto userCreatDto, UUID userId) {
+        UserEntity user1 = userRepository.findById(userId)
+                .orElseThrow(() -> new DataNotFoundException("User not found"));
+        UserEntity user=modelMapper.map(userCreatDto,UserEntity.class);
+        user.setId(userId);
+        user.setState(user1.getState());
+        user.setRole(user1.getRole());
+        user.setCreatedDate(user1.getCreatedDate());
+       // user.setPassword(passwordEncoder.encode(user.getPassword()));
+       return userRepository.save(user);
     }
 
     private void checkUserEmail(String email) {

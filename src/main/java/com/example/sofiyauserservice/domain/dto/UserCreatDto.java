@@ -25,5 +25,4 @@ public class UserCreatDto {
     @NotNull(message = "password cannot be null")
     @NotBlank(message = "password cannot be blank")
     private String password;
-//    private RoleEntity role;
 }

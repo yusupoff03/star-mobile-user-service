@@ -5,10 +5,10 @@ spring:
   application:
     name: USER_SERVICE
   datasource:
-    username: postgres
+    username: digital_shop
 
-    password: 1106
-    url: jdbc:postgresql://localhost:5432/user_service_db
+    password: 3333
+    url: jdbc:postgresql://161.35.16.131:5432/user_service
 
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -24,7 +24,7 @@ services:
 eureka:
   client:
     service-url:
-      defaultUrl: ${EUREKA_URI:http://localhost:8761/eureka/}
+      defaultUrl: ${EUREKA_URI:http://161.35.16.131:8761/eureka/}
     instance:
       preferIpAddress: true
 

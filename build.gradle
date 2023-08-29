@@ -45,6 +45,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	implementation('io.jsonwebtoken:jjwt-jackson')
 	compileOnly 'org.projectlombok:lombok:1.18.28'
 
 	annotationProcessor 'org.projectlombok:lombok:1.18.28'

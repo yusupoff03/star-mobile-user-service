@@ -26,31 +26,30 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-client'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:3.1.1'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'
-	implementation 'javax.xml.bind:jaxb-api:2.3.1'
-	implementation 'org.postgresql:postgresql:42.6.0'
-	implementation 'org.modelmapper:modelmapper:3.1.1'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-	implementation 'io.jsonwebtoken:jjwt-jackson:0.9.1'
-	compileOnly 'org.projectlombok:lombok:1.18.28'
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-client'
+		implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+		implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+		implementation 'org.springframework.boot:spring-boot-starter-validation:2.5.4'
+		implementation 'org.springframework.boot:spring-boot-starter-security'
+		implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+		implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+		implementation 'javax.xml.bind:jaxb-api:2.3.1'
+		implementation 'org.postgresql:postgresql:42.6.0'
+		implementation 'org.modelmapper:modelmapper:3.1.1'
+		implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+		implementation 'org.projectlombok:lombok:1.18.28'
 
-	annotationProcessor 'org.projectlombok:lombok:1.18.28'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		// ... other dependencies ...
+
+		annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+		testImplementation 'org.springframework.security:spring-security-test'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
 }
 
 dependencyManagement {

@@ -15,6 +15,7 @@ import com.example.sofiyauserservice.exception.DataNotFoundException;
 import com.example.sofiyauserservice.repository.RoleRepository;
 import com.example.sofiyauserservice.repository.SellerRepository;
 import com.example.sofiyauserservice.repository.UserRepository;
+import com.example.sofiyauserservice.repository.VerificationCodeRepository;
 import com.example.sofiyauserservice.service.JwtService;
 import com.example.sofiyauserservice.service.mailservice.MailService;
 import com.example.sofiyauserservice.service.verificationcode.GenerateVerificationCode;
@@ -34,11 +35,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final RoleRepository roleRepository;
-    private final GenerateVerificationCode generateVerificationCode;
+    private final VerificationCodeRepository verificationCodeRepository;
     private final MailService mailService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final SellerRepository sellerRepository;
+    private final GenerateVerificationCode generateVerificationCode;
 
     @Transactional
     public UserEntity save(UserCreatDto userCreatDto) {
@@ -65,11 +67,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean verify(String code, String sendingCode) {
-        VerificationCode verificationCode = generateVerificationCode.getVerificationCode(code);
-        if (verificationCode == null) {
-            throw new DataNotFoundException("Verification Code did not match");
-        }
+    public Boolean verify(String sendingCode,UUID userId) {
+        VerificationCode verificationCode=verificationCodeRepository.findVerificationCodeByUserId(userId)
+                .orElseThrow(()->new DataNotFoundException("Verification code for this user does not exists"));
         if (Objects.equals(sendingCode, verificationCode.getSendingCode())
                 && LocalDateTime.now().isBefore(verificationCode.getExpiryDate())) {
             UserEntity user = verificationCode.getUser();
@@ -81,13 +81,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean getNewVerifyCode(String email) {
+    public UserEntity getNewVerifyCode(String email) {
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(() -> new DataNotFoundException("User not found,Please sign up"));
         //  generateVerificationCode.deleteUserCode(userEntity);
         VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
         mailService.sendVerificationCode(email, verificationCode.getSendingCode());
-        return true;
+        return userEntity;
     }
 
     @Override

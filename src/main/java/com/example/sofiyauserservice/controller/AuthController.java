@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user/auth")
@@ -27,12 +29,12 @@ public class AuthController {
     }
 
     @PutMapping("/verify")
-    public ResponseEntity<Boolean> verify(@RequestParam String code, @RequestParam String sendingCode) {
-        return ResponseEntity.ok(userService.verify(code, sendingCode));
+    public ResponseEntity<Boolean> verify(@RequestParam UUID userId, @RequestParam String sendingCode) {
+        return ResponseEntity.ok(userService.verify(sendingCode,userId));
     }
 
     @GetMapping("/new-code")
-    public ResponseEntity<Boolean> getNewVerifyCode(@RequestParam String email) {
+    public ResponseEntity<UserEntity> getNewVerifyCode(@RequestParam String email) {
         return ResponseEntity.ok(userService.getNewVerifyCode(email));
     }
 

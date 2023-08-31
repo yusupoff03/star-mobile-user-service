@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
     public UserEntity getNewVerifyCode(String email) {
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(() -> new DataNotFoundException("User not found,Please sign up"));
-        //  generateVerificationCode.deleteUserCode(userEntity);
+          verificationCodeRepository.deleteVerificationCodeByUserEmail(userEntity.getEmail());
         VerificationCode verificationCode = generateVerificationCode.generateVerificationCode(userEntity);
         mailService.sendVerificationCode(email, verificationCode.getSendingCode());
         return userEntity;

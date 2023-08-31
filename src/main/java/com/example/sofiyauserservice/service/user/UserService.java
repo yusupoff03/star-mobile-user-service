@@ -12,8 +12,8 @@ import java.util.UUID;
 
 public interface UserService {
     UserEntity save(UserCreatDto userCreatDto);
-    Boolean verify(String code,String sendingCode);
-    Boolean getNewVerifyCode(String email);
+    Boolean verify(String sendingCode,UUID userId);
+    UserEntity getNewVerifyCode(String email);
     JwtResponse signIn(LoginDto loginDto);
     UserEntity saveSeller(SellerDto sellerDto);
     UserEntity updateUser(UserCreatDto userCreatDto, UUID userId);

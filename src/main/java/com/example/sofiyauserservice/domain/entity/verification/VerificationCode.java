@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class VerificationCode extends BaseEntity {
-    private String code;
     @ManyToOne
     private UserEntity user;
     private String sendingCode;

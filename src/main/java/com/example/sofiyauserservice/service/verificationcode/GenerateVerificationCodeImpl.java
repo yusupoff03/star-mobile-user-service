@@ -25,8 +25,8 @@ public class GenerateVerificationCodeImpl implements GenerateVerificationCode{
         return verificationCodeRepository.save(new VerificationCode(user,sendingCode,LocalDateTime.now().plusMinutes(10)));
     }
 
-    @Override
-    public VerificationCode getVerificationCode(String code) {
-        return verificationCodeRepository.findVerificationCodeByCode(code);
-    }
+//    @Override
+//    public VerificationCode getVerificationCode(String code) {
+//        return verificationCodeRepository.findVerificationCodeByCode(code);
+//    }
 }

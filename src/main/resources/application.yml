@@ -5,10 +5,10 @@ spring:
   application:
     name: USER_SERVICE
   datasource:
-    username: digital-shop-db
+    username: doadmin
 
-    password: AVNS_JHfHAsb0bbB0CTP49bm
-    url: jdbc:postgresql://165.232.104.233:5432/digital-shop-db
+    password: AVNS_od1yv8U6_AM61fgrKz6
+    url: jdbc:postgresql://digital-shop-do-user-14548663-0.b.db.ondigitalocean.com:25060/digital-shop-db
 
     driver-class-name: org.postgresql.Driver
   jpa:

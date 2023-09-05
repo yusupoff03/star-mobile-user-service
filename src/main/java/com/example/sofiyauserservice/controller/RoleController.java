@@ -13,13 +13,13 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/role")
+@RequestMapping("/role")
 public class RoleController {
 
     private final RoleService roleService;
 
     @PostMapping("/add")
-    @PreAuthorize(value = "hasRole(ADMIN)")
+//    @PreAuthorize(value = "hasRole(ADMIN)")
     public ResponseEntity<RoleEntity> addRole(
             @RequestBody RoleDto roleDto
     ){
@@ -27,7 +27,7 @@ public class RoleController {
     }
 
     @DeleteMapping("/{roleId}/delete")
-    @PreAuthorize("hasRole(ADMIN)")
+//    @PreAuthorize("hasRole(ADMIN)")
     public ResponseEntity deleteGroup(
             @PathVariable UUID roleId
     ){
@@ -36,7 +36,7 @@ public class RoleController {
     }
 
     @PutMapping("/{roleId}update")
-    @PreAuthorize("hasRole(ADMIN)")
+//    @PreAuthorize("hasRole(ADMIN)")
     public ResponseEntity<RoleEntity> updateGroup(
             @PathVariable UUID roleId,
             @RequestBody RoleDto roleDto
@@ -45,7 +45,7 @@ public class RoleController {
     }
 
     @GetMapping("/getAll")
-    @PreAuthorize("hasRole(SUPER_ADMIN)")
+//    @PreAuthorize("hasRole(SUPER_ADMIN)")
     public ResponseEntity<List<RoleEntity>> getAll(
             @RequestParam(required = false) int page,
             @RequestParam(required = false) int size

@@ -19,13 +19,13 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/sign-up")
-    public UserEntity signUp(@Valid
+    public ResponseEntity<UserEntity> signUp(@Valid
                              @RequestBody UserCreatDto userCreatDto,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new RequestValidationException(bindingResult.getAllErrors());
         }
-        return userService.save(userCreatDto);
+        return ResponseEntity.ok(userService.save(userCreatDto));
     }
 
     @PutMapping("/verify")
